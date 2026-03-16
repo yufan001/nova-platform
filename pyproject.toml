@@ -38,14 +38,18 @@ linux = [
 ]
 
 [project.entry-points."nova.tools"]
-macos = "nova_platform.macos.tools:register_tools"
-windows = "nova_platform.windows.tools:register_tools"
-linux = "nova_platform.linux.tools:register_tools"
+macos = "nova_platform.macos:register_tools"
+windows = "nova_platform.windows:register_tools"
+linux = "nova_platform.linux:register_tools"
 
 [project.entry-points."nova.skills"]
-macos = "nova_platform.macos.skills:register_skills"
-windows = "nova_platform.windows.skills:register_skills"
-linux = "nova_platform.linux.skills:register_skills"
+macos = "nova_platform.macos:register_skills"
+windows = "nova_platform.windows:register_skills"
+linux = "nova_platform.linux:register_skills"
 
 [tool.hatch.build.targets.wheel]
 packages = ["nova_platform"]
+artifacts = ["nova_platform/*/skills/*/SKILL.md"]
+
+[tool.hatch.build.targets.sdist]
+include = ["nova_platform/**/*.md", "nova_platform/**/*.py"]
