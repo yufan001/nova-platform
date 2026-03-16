@@ -1,0 +1,51 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "nova-platform"
+version = "0.1.0"
+description = "Platform-specific tools and skills for Nova AI agent"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [
+    { name = "Nova Team", email = "team@nova.ai" }
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "nova-ai>=0.1.0",
+]
+
+[project.optional-dependencies]
+macos = [
+    "pyobjc-framework-Cocoa>=10.0",
+    "pyobjc-framework-ScriptingBridge>=10.0",
+]
+windows = [
+    "pywin32>=306",
+]
+linux = [
+    "dbus-python>=1.3",
+]
+
+[project.entry-points."nova.tools"]
+macos = "nova_platform.macos.tools:register_tools"
+windows = "nova_platform.windows.tools:register_tools"
+linux = "nova_platform.linux.tools:register_tools"
+
+[project.entry-points."nova.skills"]
+macos = "nova_platform.macos.skills:register_skills"
+windows = "nova_platform.windows.skills:register_skills"
+linux = "nova_platform.linux.skills:register_skills"
+
+[tool.hatch.build.targets.wheel]
+packages = ["nova_platform"]
